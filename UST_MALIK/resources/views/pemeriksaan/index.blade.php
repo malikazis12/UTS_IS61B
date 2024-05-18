@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title','Data Pemeriksaan')
 @section('judul','Data Pemeriksaan')
-@section('nama','Hananan Academy')
+@section('nama','Rawat Inap Darurat')
 @section('content')
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -28,7 +28,7 @@
                     <thead>
                         <tr>
                             <th>Diagnosa</th>
-                            <th>Rekam_Medir</th>
+                            <th>Rekam Medis</th>
                             <th>Foto</th>
 
                         </tr>

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title','Edit Diagnosa Pasien')
 @section('judul','Edit Diagnosa Pasien')
-@section('nama','Hananan Academy')
+@section('nama','Rawat Inap Darurat')
 @section('content')
 <div class="container-fluid">
     <div class="card shadow mb-4">
