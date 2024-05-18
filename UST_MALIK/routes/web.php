@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PemeriksaanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,8 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//Pemeriksaan Pasien
+Route::get('/pemeriksaan/', [PemeriksaanController::class, 'index'])->middleware('auth');
+Route::get('/pemeriksaan/form/', [PemeriksaanController::class, 'create'])->middleware('auth');
+Route::post('/pemeriksaan/store/', [PemeriksaanController::class, 'store'])->middleware('auth');
