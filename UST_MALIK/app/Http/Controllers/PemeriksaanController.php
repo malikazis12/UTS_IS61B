@@ -13,8 +13,8 @@ class PemeriksaanController extends Controller
     public function index()
     {
         $nomor = 1;
-        $sis = Pemeriksaan::all();
-        return view('pemeriksaan.index',compact('nomor','sis'));
+        $pem = Pemeriksaan::all();
+        return view('pemeriksaan.index',compact('nomor','pem'));
     }
 
     /**
@@ -33,25 +33,16 @@ class PemeriksaanController extends Controller
         $request->validate([
             'diagnosa' => 'required',
             'rekam_medis' => 'required|date',
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'foto' => 'required',
         ]);
 
-        // Handle file upload
-        if ($request->hasFile('foto')) {
-            $file = $request->file('foto');
-            $filename = time().'_'.$file->getClientOriginalName();
-            $filePath = $file->storeAs('uploads', $filename, 'public');
+        $pem = new Pemeriksaan;
+        $pem->diagnosa = $request->diagnosa;
+        $pem->rekam_medis = $request->rekam_medis;
+        $pem->foto = $request->foto;
+        $pem->save();
 
-            $pem = new Pemeriksaan;
-            $pem->diagnosa = $request->diagnosa;
-            $pem->rekam_medis = $request->rekam_medis;
-            $pem->foto = '/storage/' . $filePath;
-            $pem->save();
-
-            return redirect('/pemeriksaan/')->with('success', 'Data berhasil disimpan');
-        } else {
-            return redirect('/pemeriksaan/create')->withErrors('Foto wajib diunggah');
-        }
+        return redirect('/pemeriksaan/');
     }
 
     /**
@@ -59,7 +50,7 @@ class PemeriksaanController extends Controller
      */
     public function show(string $id)
     {
-        // Fungsi untuk menampilkan detail data (belum diimplementasikan)
+        //
     }
 
     /**
@@ -83,37 +74,29 @@ class PemeriksaanController extends Controller
         $request->validate([
             'diagnosa' => 'required',
             'rekam_medis' => 'required|date',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'foto' => 'required',
         ]);
 
         $pem = Pemeriksaan::find($id);
         if ($pem) {
             $pem->diagnosa = $request->diagnosa;
             $pem->rekam_medis = $request->rekam_medis;
-            if ($request->hasFile('foto')) {
-                $file = $request->file('foto');
-                $filename = time().'_'.$file->getClientOriginalName();
-                $filePath = $file->storeAs('uploads', $filename, 'public');
-                $pem->foto = '/storage/' . $filePath;
-            }
+            $pem->foto = $request->foto;
             $pem->save();
-            return redirect('/pemeriksaan/')->with('success', 'Data berhasil diperbarui');
         } else {
             return redirect('/pemeriksaan/')->withErrors('Data tidak ditemukan');
         }
-    }
 
+        return redirect('/pemeriksaan/');
+    }
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
         $pem = Pemeriksaan::find($id);
-        if ($pem) {
-            $pem->delete();
-            return redirect('/pemeriksaan/')->with('success', 'Data berhasil dihapus');
-        } else {
-            return redirect('/pemeriksaan/')->withErrors('Data tidak ditemukan');
-        }
+        $pem->delete();
+
+        return redirect('/pemeriksaan/');
     }
 }

@@ -14,15 +14,16 @@ use App\Http\Controllers\PemeriksaanController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//Pemeriksaan Pasien
-Route::get('/pemeriksaan/', [PemeriksaanController::class, 'index'])->middleware('auth');
-Route::get('/pemeriksaan/form/', [PemeriksaanController::class, 'create'])->middleware('auth');
-Route::post('/pemeriksaan/store/', [PemeriksaanController::class, 'store'])->middleware('auth');
+// Pemeriksaan Pasien
+Route::middleware(['auth'])->group(function () {
+    Route::get('/pemeriksaan/', [PemeriksaanController::class, 'index'])->middleware('auth');
+    Route::get('/pemeriksaan/form/', [PemeriksaanController::class, 'create'])->middleware('auth');
+    Route::post('/pemeriksaan/store/', [PemeriksaanController::class, 'store'])->middleware('auth');
+    Route::get('/pemeriksaan/edit/{id}', [PemeriksaanController::class, 'edit'])->middleware('auth');
+    Route::put('/pemeriksaan/{id}', [PemeriksaanController::class, 'update'])->middleware('auth');
+    Route::delete('/pemeriksaan/{id}', [PemeriksaanController::class, 'destroy'])->middleware('auth');
+});

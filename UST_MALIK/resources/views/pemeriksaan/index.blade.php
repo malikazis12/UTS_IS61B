@@ -1,6 +1,6 @@
 @extends('layouts.master')
-@section('title','Data Siswa')
-@section('judul','Data siswa')
+@section('title','Data Pemeriksaan')
+@section('judul','Data Pemeriksaan')
 @section('nama','Hananan Academy')
 @section('content')
 <!-- Begin Page Content -->
@@ -20,7 +20,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Data Siswa</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Data Pemeriksaan</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -34,7 +34,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($sis as $item)
+                        @forelse ($pem as $item)
                     <tr>
                         <td>{{$nomor++}}</td>
                         <td>{{$item->diagnosa}}</td>
@@ -55,11 +55,11 @@
                                     <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                    Yakin ingin menghapus data siswa <b>{{$item->nama}}</b>?
+                                    Yakin ingin menghapus data Pemeriksaan <b>{{$item->diagnosa}}</b>?
                                     </div>
                                     <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                    <form action="/pemeriksaan/{{$item->nisn}}" method="post">
+                                    <form action="/pemeriksaan/{{$item->id}}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-primary">Hapus</button>

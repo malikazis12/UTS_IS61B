@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('pemeriksaans', function (Blueprint $table) {
             $table->id();
+            $table->string('diagnosa');
+            $table->string('rekam_medis');
+            $table->string('foto');
             $table->timestamps();
         });
     }

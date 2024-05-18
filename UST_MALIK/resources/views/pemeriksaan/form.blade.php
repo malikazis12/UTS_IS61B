@@ -1,12 +1,12 @@
 @extends('layouts.master')
 @section('title','Diagnosa Pasien')
 @section('judul','Diagnosa Pasien')
-@section('nama','Hananan Academy')
+@section('nama','Rawat Inap Darurat')
 @section('content')
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-body">
-            <form method="POST" action="/pemeriksaan/store/" enctype="multipart/form-data">
+            <form method="POST" action="/pemeriksaan/store/">
                 @csrf
                 <div class="form-group">
                     <label for="diagnosa">Diagnosa:</label>
@@ -14,7 +14,7 @@
                 </div>
                 <div class="form-group">
                     <label for="rekam_medis">Rekam Medis:</label>
-                    <input type="text" class="form-control" id="rekam_medis" name="rekam_medis">
+                    <input type="date" class="form-control" id="rekam_medis" name="rekam_medis">
                 </div>
                 <div class="form-group">
                     <label for="foto">Foto:</label>
